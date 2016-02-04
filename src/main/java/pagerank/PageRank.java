@@ -15,19 +15,19 @@ public class PageRank {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        String nomFichier="GrapheDuWeb.txt";
+        String nomFichier="web1.txt";
         
         /*0. Affichage du graphe du web*/
         LectureGrapheDuWeb.afficheGrapheDuWeb(nomFichier);
         
        /*1. Construction du tableau de debut des predesseurs de chaque sommet*/
-        int tabDebut[]=new int[4];
+        int tabDebut[]=new int[LectureGrapheDuWeb.n+1];
         tabDebut=LectureGrapheDuWeb.ConstructionTabDebut(nomFichier);
         System.out.println();
         System.out.println("n = "+LectureGrapheDuWeb.n);
         System.out.println("nz = "+LectureGrapheDuWeb.nz);
         System.out.print("TabDebut : ");
-        for(int i=0; i<4; i++) System.out.print(tabDebut[i]+"  ");
+        for(int i=0; i<LectureGrapheDuWeb.n+1; i++) System.out.print(tabDebut[i]+"  ");
         System.out.println();
         
        /*2. Construction du tableau des predecesseurs de chaque sommet*/
@@ -38,7 +38,9 @@ public class PageRank {
         System.out.println();
         
        /*3. Calcul du produit de la matrice */
-        double [] e={1,1,1}; System.out.print("Vecteur e : "); for(int i=0; i<e.length; i++) System.out.print(e[i]+"  ");
+        double [] e=new double[LectureGrapheDuWeb.n];
+        for(int i=0; i<LectureGrapheDuWeb.n; i++) e[i]=1;
+        System.out.print("Vecteur e : "); for(int i=0; i<e.length; i++) System.out.print(e[i]+"  ");
         double produit[]=Matrice.produit(e,tabPreds, tabDebut);
         System.out.println();
         System.out.print("Produit : "); for(int i=0; i<produit.length; i++) System.out.print(produit[i]+"  ");
@@ -47,7 +49,7 @@ public class PageRank {
         //DETERMINATION DE LA PERTINENCE DES PAGES
         /*1. Initialisation de la pertinence de chaque sommet*/
         double [] P=new double[LectureGrapheDuWeb.n];
-        for(int i=0; i<LectureGrapheDuWeb.n; i++) P[i]=(double)1/(double)3;
+        for(int i=0; i<LectureGrapheDuWeb.n; i++) P[i]=(double)1/(double)LectureGrapheDuWeb.n;
         System.out.print("P : "); for(int i=0; i<P.length; i++) System.out.print(P[i]+"  ");
         /*definition de la matrice H*/
         

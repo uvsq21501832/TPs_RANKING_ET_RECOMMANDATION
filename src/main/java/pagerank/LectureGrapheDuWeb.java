@@ -114,10 +114,10 @@ public class LectureGrapheDuWeb {
             // ALLOUE NOTRE TABLEAU DE N ELEMENTS
             tableau = new double[args.length];                       
             // COPIE CHAMP A CHAMP + AFFICHAGE
-            int s=0;
+            int s;
             for( int i=2;i<tableau.length;i++){
-                tableau[i] = Float.parseFloat( args[i] );
-                
+                s= (int)Float.parseFloat( args[i] );
+                tabPreds[ips[s-1]++]=Float.parseFloat( args[++i] );
             	}
             }
             br.close();

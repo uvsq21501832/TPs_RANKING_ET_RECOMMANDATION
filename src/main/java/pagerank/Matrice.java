@@ -12,9 +12,12 @@ public class Matrice {
     
     //METHODE QUI RENVOI LA PRODUIT DE DEUX MATRICES
     public static double[] produit(double[] e, double[] tabPreds, int [] tabDebut){
-        double r[]={0,0,0};
+    	double r[]= new double[e.length];
+    	for(int i=0; i<e.length; i++){
+    		r[i]=0;
+    	}
         int k=0;
-        for(int i=0; i<3; i++){
+        for(int i=0; i<e.length; i++){
             for(int j=tabDebut[i]; j<tabDebut[i+1]; j++){
                 r[i]+=e[k++]*tabPreds[j];
             }
