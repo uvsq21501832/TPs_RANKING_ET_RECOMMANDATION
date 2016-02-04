@@ -69,9 +69,12 @@ public class PageRank {
            K=P;
            P=Matrice.produit(P, tabPreds, tabDebut);
            i++;
-        }while(Matrice.norme(P)-Matrice.norme(K)<=0.000001);
+        }while(Matrice.norme(Matrice.difference(P,K))<=Math.pow(10, -6));
         System.out.println("Nombre d'iteration : "+i);
+        
+        System.out.println("Norme K : "+Matrice.norme(K));
         System.out.println("Norme P : "+Matrice.norme(P));
+        
         /**/
     }
 }

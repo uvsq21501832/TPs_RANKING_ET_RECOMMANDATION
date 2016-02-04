@@ -32,4 +32,12 @@ public class Matrice {
         return norme;
         
     }
+    public static double [] difference(double [] vecteur1, double[] vecteur2){
+        double[] somme=new double[vecteur1.length];
+        for(int i=0;i<vecteur1.length;i++) somme[i]=0;
+        for(int i=0;i<vecteur1.length;i++) somme[i]=vecteur1[i]+vecteur2[i];
+        
+        return somme;
+        
+    }
 }
