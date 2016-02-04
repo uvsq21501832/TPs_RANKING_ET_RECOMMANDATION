@@ -50,6 +50,7 @@ public class PageRank {
         for(int i=0; i<LectureGrapheDuWeb.n; i++) P[i]=(double)1/(double)3;
         System.out.print("P : "); for(int i=0; i<P.length; i++) System.out.print(P[i]+"  ");
         /*definition de la matrice H*/
+        
         double [][] H = new double[LectureGrapheDuWeb.n][LectureGrapheDuWeb.n];
         int k=0;
         System.out.println("\nMatrice H");
@@ -68,6 +69,7 @@ public class PageRank {
            i++;
         }while(Matrice.norme(P)-Matrice.norme(K)<=0.000001);
         System.out.println("Nombre d'iteration : "+i);
+        System.out.println("Norme P : "+Matrice.norme(P));
         /**/
     }
 }

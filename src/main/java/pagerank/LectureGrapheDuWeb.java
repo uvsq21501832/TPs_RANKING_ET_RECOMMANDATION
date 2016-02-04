@@ -44,9 +44,10 @@ public class LectureGrapheDuWeb {
     
    //METHODE DE CONSTRUCTION DU TABLEAU DE DEBUT DES PREDECESSEURS DE CHAQUE SOMME
     public static int [] ConstructionTabDebut(String nomFichier){
-        int tabDebut[]=new int[4];
-        tabDebut[0]=0;
-        int c1=0, c2=0, c3=0; //initialisation des compteurs du nombre de predecesseursd de chaque sommet
+        //int tabDebut[]=new int[4];
+        //tabDebut[0]=0;
+    	int tabDebut[];
+    	int [] c;
         double [] tableau;
         try{
             // OUVRE LE FICHIER
@@ -61,37 +62,42 @@ public class LectureGrapheDuWeb {
             args = tmp.split(" ");
             nz= Integer.parseInt( args[0] );
             
+            tabDebut=new int[n+1];
+            tabDebut[0]=0;
+            //initialisation des compteurs du nombre de predecesseurs de chaque sommet
+            c=new int[n]; for(int i=0; i<n; i++) c[i]=0;
             while ((tmp=br.readLine())!=null){
             // STOCK LA LIGNE DANS UN BUFFER                    
             // COUPE LA LIGNE SUIVANT LES ESPACES
             args = tmp.split(" ");                       
             // ALLOUE NOTRE TABLEAU DE N ELEMENTS
             tableau = new double[args.length];                       
-            // COPIE CHAMP A CHAMP + AFFICHAGE
+            // COPIE CHAMP A CHAMP
             for( int i=2;i<tableau.length;i++){
                 tableau[i] = Float.parseFloat( args[i] );
-                if(tableau[i]==1) c1++;
-                else if(tableau[i]==2) c2++;
-                else if(tableau[i]==3) c3++;
+                int s=(int)tableau[i];
+                c[s-1]++;
                 i++;              
             }
             }
-            br.close();
+         br.close();
+         for(int i=0;i<n;i++){
+         tabDebut[i+1]=tabDebut[i]+c[i];}
+         return tabDebut;
         }catch( IOException | NumberFormatException e ){
             System.out.println("Erreur, le fichier n'existe pas ou est mal formaté: ");
         }
-        tabDebut[1]=tabDebut[0]+c1;
-        tabDebut[2]=tabDebut[1]+c2;
-        tabDebut[3]=tabDebut[2]+c3;
-        return tabDebut;
+        return null;
     }
     
     //METHODE DE CONSTRUCTION DU TABLEAU DE DEBUT DES PREDECESSEURS DE CHAQUE SOMME
     public static double [] ConstructionTabPreds(String nomFichier, int [] tabDebut){
         double tabPreds[]=new double[LectureGrapheDuWeb.nz];
-        int ips1=tabDebut[0];
-        int ips2=tabDebut[1];
-        int ips3=tabDebut[2];
+        int ips[]=new int[n];
+        
+        for(int i=0; i<n; i++){
+         ips[i]=tabDebut[i];
+        }
         double [] tableau;
         try{
             // OUVRE LE FICHIER
@@ -108,20 +114,11 @@ public class LectureGrapheDuWeb {
             // ALLOUE NOTRE TABLEAU DE N ELEMENTS
             tableau = new double[args.length];                       
             // COPIE CHAMP A CHAMP + AFFICHAGE
+            int s=0;
             for( int i=2;i<tableau.length;i++){
                 tableau[i] = Float.parseFloat( args[i] );
-                if(tableau[i]==1) { 
-                    i++; tableau[i] = Float.parseFloat( args[i] ); tabPreds[ips1++]=tableau[i];
-                }else{
-                    if(tableau[i]==2) { 
-                        i++; tableau[i] = Float.parseFloat( args[i] ); tabPreds[ips2++]=tableau[i];
-                    }else{
-                        if(tableau[i]==3) {
-                            i++; tableau[i] = Float.parseFloat( args[i] ); tabPreds[ips3++]=tableau[i];
-                        }
-                     }             
-                    }
-                }
+                
+            	}
             }
             br.close();
         }catch( IOException | NumberFormatException e ){
