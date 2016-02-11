@@ -26,7 +26,7 @@ public class Matrice {
     //METHODE QUI RENVOI LA NORME D'UN VECTEUR (tableau)
     public static double norme(double [] vecteur){
         double norme=0;
-        for(int i=0;i<vecteur.length;i++) norme+=vecteur[i];
+        for(int i=0;i<vecteur.length;i++) norme+=valeurAbsolue(vecteur[i]);
         return norme;   
     }
     
@@ -36,5 +36,10 @@ public class Matrice {
         for(int i=0;i<vecteur1.length;i++) diff[i]=0;
         for(int i=0;i<vecteur1.length;i++) diff[i]=vecteur2[i]-vecteur1[i];
         return diff;
+    }
+    //VELEUR ABSOLUE
+    public static double valeurAbsolue(double valeur){
+        if(valeur<0) valeur=valeur*(-1);
+        return valeur;
     }
 }

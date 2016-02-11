@@ -58,14 +58,10 @@ public class PageRank {
            condition=Matrice.norme(Matrice.difference(P,K));
            /*test*/
            //System.out.println("\nNorme P : "+Matrice.norme(P));
-           System.out.println("\nnorme(diff) : "+valeurAbsolue(condition)); System.out.println();
+           System.out.println("\nnorme(diff) : "+condition); System.out.println();
            /*fin test*/
            nombreIteration++;
-        }while(valeurAbsolue(condition)< Math.pow(10, -6));
+        }while(condition > Math.pow(10, -6));
         System.out.println("\nNombre d'iteration : "+(nombreIteration-1));
-    }
-    public static double valeurAbsolue(double valeur){
-        if(valeur<0) valeur=valeur*(-1);
-        return valeur;
     }
 }
