@@ -4,40 +4,37 @@
  */
 package pagerank;
 
-/**
- *
- * @author Poulmanogo
- */
 public class Matrice {
-    
     //METHODE QUI RENVOI LA PRODUIT DE DEUX MATRICES
-    public static double[] produit(double[] e, double[] tabPreds, int [] tabDebut){
+    public static double[] produit(double[] e, double[][] tabPreds, int [] tabDebut){
     	double r[]= new double[e.length];
     	for(int i=0; i<e.length; i++){
     		r[i]=0;
     	}
-        int k=0;
         for(int i=0; i<e.length; i++){
-            for(int j=tabDebut[i]; j<tabDebut[i+1]; j++){
-                r[i]+=e[k++]*tabPreds[j];
-            }
-            k=0;
+            int k=0;
+            int j=tabDebut[i];
+            do{
+                if(k+1==tabPreds[0][j]){
+                    r[i]+=e[k]*tabPreds[1][j];
+                    k++; j++;
+                } else k++; 
+            }while(j<tabDebut[i+1] && k<e.length);
         }
         return r;
     }
-    
+    //METHODE QUI RENVOI LA NORME D'UN VECTEUR (tableau)
     public static double norme(double [] vecteur){
-        int norme=0;
+        double norme=0;
         for(int i=0;i<vecteur.length;i++) norme+=vecteur[i];
-        return norme;
-        
+        return norme;   
     }
-    public static double [] difference(double [] vecteur1, double[] vecteur2){
-        double[] somme=new double[vecteur1.length];
-        for(int i=0;i<vecteur1.length;i++) somme[i]=0;
-        for(int i=0;i<vecteur1.length;i++) somme[i]=vecteur1[i]+vecteur2[i];
-        
-        return somme;
-        
+    
+    //METHODE QUI RENVOI LA DIFFERENCE DE NORME DE DEUX MATRICES
+    public static double [] difference(double [] vecteur2, double[] vecteur1){
+        double[] diff=new double[vecteur1.length];
+        for(int i=0;i<vecteur1.length;i++) diff[i]=0;
+        for(int i=0;i<vecteur1.length;i++) diff[i]=vecteur2[i]-vecteur1[i];
+        return diff;
     }
 }
